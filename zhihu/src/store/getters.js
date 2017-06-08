@@ -3,7 +3,6 @@
  */
 export const getters = {
   latestArticles: (state) => {
-    console.log(state.latestArticles)
-   return state.latestArticles
+    return state.latestArticles
   }
 };
