@@ -3,8 +3,11 @@
       <div class="load-wrapper">
         <h1 class="list-time-detail">{{listTitle}}</h1>
         <ul class="list-content-wrapper">
-          <li v-for=" listContent in listContents" class="listContent">
-            {{listContent}}
+          <li v-for=" (listContent,index) in listContents" class="listContent" :key="index">
+            <p class="list-title">
+              {{listContent.title}}
+            </p>
+            <img :src="listContent.images" alt="" class="list-img" height="66" width="66">
           </li>
         </ul>
       </div>
@@ -80,8 +83,14 @@
         .list-content-wrapper
           .listContent
             margin-bottom:rem(15)
+            padding:rem(15) rem(6) rem(10)
             border-radius:rem(5)
             background: #ffffff
             border:rem(1) solid #eaeaea
             border-bottom:rem(1) solid #d0d0d0
+            display:flex
+            .list-title
+              flex:1
+              font-size:rem(16)
+              padding:0 rem(12) 0 rem(6)
 </style>
