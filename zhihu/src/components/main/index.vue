@@ -1,8 +1,8 @@
 <template>
   <div>
-    <v-main-header>header</v-main-header>
-    <div class="v-main-list-wrapper" v-show="!showFlag">
-      <v-main-list :lateArticles="lateArticles">
+    <v-main-header></v-main-header>
+    <div class="v-main-list-wrapper" v-if="showFlag">
+      <v-main-list :allArticles="allArticles">
       </v-main-list>
     </div>
   </div>
@@ -29,10 +29,10 @@ export default {
   },
   computed: {
     ...mapGetters({
-      lateArticles: 'latestArticles'
+      allArticles: 'allArticles'
     }),
     showFlag () {
-       return ((typeof this.lateArticles) === 'function')
+       return (this.allArticles instanceof Array)
     }
   }
 }

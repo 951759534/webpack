@@ -3,13 +3,19 @@
  */
 import * as types from './mutation-types'
 export const mutations = {
-  [types.RECEIVE_ALLARTICLES] (state, { latestArticles }) {
+  [types.RECEIVE_LATESTARTICLES] (state, { latestArticles }) {
     if (!latestArticles.erro) {
-      localStorage.setItem('lastestArticles', JSON.stringify(latestArticles));
+      state.allArticles = [];
+      state.allArticles[0] = latestArticles
+    } else {
+      state.allArticles[0] = JSON.parse(localStorage.getItem('latestArticles'))
     }
-    state.latestArticles = JSON.parse(localStorage.getItem('lastestArticles'))
+  },
+  [types.RECEIVE_NEXTTARTICLES] (state, {nextArticles}) {
+    state.allArticles.push(nextArticles)
+    state.allArticles = state.allArticles.unique()
   }
 };
 export const state = {
-  latestArticles: Object
+  allArticles: Array
 };

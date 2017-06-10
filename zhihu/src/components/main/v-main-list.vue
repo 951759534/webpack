@@ -1,11 +1,11 @@
 <template>
     <div class="main-list-wrapper" ref="mainList">
-      <div class="main-list-hook">
+      <div ref="mainlistWraper">
           <div class="v-main-swiper-wraper">
-            <v-main-swiper :imageInfos = "lateArticles.top_stories"></v-main-swiper>
+            <v-main-swiper :imageInfos = "allArticles[0].top_stories"></v-main-swiper>
           </div>
           <div class="main-list">
-            <v-load-list :list-date = "lateArticles.date" :list-contents = "lateArticles.stories"></v-load-list>
+            <v-load-list v-for="(article,index) in allArticles" :list-date = "article.date" :list-contents = "article.stories" :key = "index"></v-load-list>
           </div>
       </div>
     </div>
@@ -19,10 +19,12 @@
         name: 'main-list',
         data () {
             return {
+              loadNext: false
             }
         },
         props: {
-          lateArticles: {
+          allArticles: {
+            type: Array
           }
         },
         components: {
@@ -31,11 +33,28 @@
         },
         created () {
           this.$nextTick(() => {
-            console.log(this.$refs.mainList)
             this.mainlist = new BScroll(this.$refs.mainList, {
-              scrollY: true
+              momentum: true,
+              bounce: false,
+              scrollY: true,
+              probeType: 2
+            });
+            this.mainlist.on('scroll', (pos) => {
+              this.currentListHeight = this.$refs.mainlistWraper.offsetHeight - this.$refs.mainList.offsetHeight;
+              if (this.currentListHeight <= (-pos.y) && !this.loadNext) {
+                this.loadNext = true;
+                this.$store.dispatch('getNextArticles', {
+                  date: this.allArticles[this.allArticles.length - 1].date
+                })
+              }
             })
           })
+        },
+        computed: {
+        },
+        updated () {
+          this.mainlist.refresh()
+          this.loadNext = false
         }
     }
 </script>

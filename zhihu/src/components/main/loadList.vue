@@ -50,7 +50,7 @@
                 if (now.getFullYear() === titleDate.getFullYear() && now.getMonth() === titleDate.getMonth() && now.getDate() === titleDate.getDate()) {
                   return '今日新闻';
                 } else {
-                  return titleDate.getMonth() + '月' + titleDate.getDay() + '日' + '     ' + weeksArray[titleDate.getDay()];
+                  return (titleDate.getMonth() + 1) + '月' + titleDate.getDate() + '日' + '     ' + weeksArray[titleDate.getDay()];
                 }
             }
         },

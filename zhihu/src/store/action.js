@@ -1,3 +1,4 @@
+/* eslint-disable eol-last */
 /**
  * Created by K550jk on 2017/6/5.
  */
@@ -6,17 +7,25 @@ import axios from 'axios'
 export const actions = {
   getLatestArticles ({ commit }) {
     /* shop.getProducts(products => {
-      /!* commit(types.RECEIVE_PRODUCTS, { products })  *!/
-    }) */
+     /!* commit(types.RECEIVE_PRODUCTS, { products })  *!/
+     }) */
     axios.get('api/news/latest').then(function (res) {
-      commit(types.RECEIVE_ALLARTICLES, { 'latestArticles': res.data });
+      commit(types.RECEIVE_LATESTARTICLES, { 'latestArticles': res.data });
+      localStorage.setItem('latestArticles', JSON.stringify(res.data));
     }).catch(function (erro) {
-      commit(types.RECEIVE_ALLARTICLES, {
+      commit(types.RECEIVE_LATESTARTICLES, {
         'latestArticles': {
           'erro': erro
         }
       })
-        console.log(erro);
-      });
+      console.log(erro);
+    });
+  },
+  getNextArticles ({ commit }, { date }) {
+    axios.get('api/news/before/' + date).then((res) => {
+      commit(types.RECEIVE_NEXTTARTICLES, {'nextArticles': res.data})
+    }).catch((erro) => {
+      console.log(erro)
+    })
   }
-};
+ }
