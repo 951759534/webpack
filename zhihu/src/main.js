@@ -8,9 +8,6 @@ import router from './router'
 import './assets/css/common.styl'
 import siwper from 'vue-awesome-swiper'
 Vue.use(siwper)
-  Array.prototype.unique = function () {
-    return [...new Set(this)]
-  }
 Vue.config.productionTip = false;
 /* eslint-disable no-new */
 new Vue({
