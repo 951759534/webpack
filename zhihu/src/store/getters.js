@@ -4,5 +4,11 @@
 export const getters = {
   allArticles: (state) => {
     return state.allArticles
+  },
+  loadNext: (state) => {
+    return state.loadNext
+  },
+  loadStart: (state) => {
+    return state.loadStart
   }
 };
