@@ -1,3 +1,4 @@
+/* eslint-disable no-extend-native */
 /**
  * Created by K550jk on 2017/6/5.
  */
@@ -10,12 +11,21 @@ export const mutations = {
     } else {
       state.allArticles[0] = JSON.parse(localStorage.getItem('latestArticles'))
     }
+    state.loadStart = false
   },
   [types.RECEIVE_NEXTTARTICLES] (state, {nextArticles}) {
     state.allArticles.push(nextArticles)
-    state.allArticles = state.allArticles.unique()
+    state.loadNext = !state.loadNext
+  },
+  [types.CHANGE_LOADNEXT] (state) {
+    state.loadNext = !state.loadNext
+  },
+  [types.CHANG_LOADSTART] (state) {
+    state.loadStart = !state.loadStart
   }
 };
 export const state = {
-  allArticles: Array
+  allArticles: Array,
+  loadNext: false,
+  loadStart: false   //  加载前和加载中状态
 };
