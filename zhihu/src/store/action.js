@@ -27,5 +27,11 @@ export const actions = {
     }).catch((erro) => {
       console.log(erro)
     })
+  },
+  changeLoadNext ({commit}) {
+    commit(types.CHANGE_LOADNEXT, {})
+  },
+  changeLoadStart ({commit}) {
+    commit(types.CHANG_LOADSTART, {})
   }
  }
