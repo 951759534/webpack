@@ -4,6 +4,7 @@
     <div class="v-main-list-wrapper" v-if="showFlag">
       <v-main-list :allArticles="allArticles">
       </v-main-list>
+
     </div>
   </div>
 </template>
