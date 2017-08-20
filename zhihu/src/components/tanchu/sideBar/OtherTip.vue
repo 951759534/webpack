@@ -30,5 +30,5 @@
   .tipWord
     color:#ffffff
     display:inline-block
-    margin-left:rem(9)
+    margin-right:rem(9)
 </style>

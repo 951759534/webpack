@@ -1,11 +1,11 @@
 <template>
     <div class="tanChu">
       <transition name="fade">
-       <div class="mask" @click="changeSideBar" v-show="sideBar"></div>
+       <div class="mask" @click="changeSideBar" v-if="sideBar"></div>
       </transition>
-      <transition name="slide" mode="out-in">
-        <div class="sideBar" v-show="sideBar">
-          <sideBar></sideBar>
+      <transition name="slide">
+        <div class="sideBar" v-if="sideBar">
+          <sideBar :sideList="sideList"></sideBar>
         </div>
       </transition>
     </div>
@@ -21,10 +21,12 @@
     },
     computed: {
       ...mapGetters({
-        sideBar: 'sideBar'
+        sideBar: 'sideBar',
+        sideList: 'sideList'
       })
     },
-    created () {
+    beforeCreate () {
+      this.$store.dispatch("getSideList");
     },
     methods: {
       changeSideBar () {
@@ -40,6 +42,7 @@
 <!-- Add "scoped" attribute to limit CSS to this component only  添加scoped属性限制css只能在本模板用 -->
 <style lang="stylus" rel="stylesheet/stylus">
   @import "../../assets/css/font.styl"
+  @import "../../assets/css/mix.styl"
   .tanChu
     .mask
       position:absolute
@@ -56,7 +59,7 @@
       top:0
       bottom:0
       left:0
-      width: 280px
+      width: rem(280)
       background:#ffffff
       transition:transform .2s linear
       transform:translateX(0)
