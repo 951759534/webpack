@@ -33,5 +33,17 @@ export const actions = {
   },
   changeLoadStart ({commit}) {
     commit(types.CHANG_LOADSTART, {})
+  },
+  changeSideBar ({commit}) {
+    commit(types.CHANGE_SIDEBAR, {})
+  },
+  getSideList ({ commit }) {
+    axios.get('api/themes').then((res) => {
+      commit(types.SIDELIST, {
+        'sideList': res.data.others
+      })
+    }).catch((erro) => {
+      console.log(erro)
+    })
   }
  }

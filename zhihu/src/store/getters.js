@@ -10,5 +10,11 @@ export const getters = {
   },
   loadStart: (state) => {
     return state.loadStart
+  },
+  sideBar: (state) => {
+    return state.sideBar
+  },
+  sideList: (state) => {
+    return state.sideList
   }
 };

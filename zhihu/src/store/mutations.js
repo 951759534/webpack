@@ -22,10 +22,18 @@ export const mutations = {
   },
   [types.CHANG_LOADSTART] (state) {
     state.loadStart = !state.loadStart
+  },
+  [types.CHANGE_SIDEBAR] (state) {
+    state.sideBar = !state.sideBar
+  },
+  [types.SIDELIST] (state, {sideList}) {
+    state.sideList = sideList;
   }
 };
 export const state = {
   allArticles: Array,
   loadNext: false,
-  loadStart: false   //  加载前和加载中状态
+  loadStart: false,      //  加载前和加载中状态
+  sideBar: false,
+  sideList: Array
 };
