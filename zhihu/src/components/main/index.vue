@@ -1,11 +1,9 @@
 <template>
   <div>
     <v-main-header></v-main-header>
-    <div class="v-main-list-wrapper" v-if="showFlag">
-      <v-main-list :allArticles="allArticles">
-      </v-main-list>
-
-    </div>
+      <router-view :allArticles="allArticles" v-if="showFlag">
+      </router-view>
+    <Tanchu> </Tanchu>
   </div>
 </template>
 
@@ -13,7 +11,7 @@
   /* eslint-disable no-unused-vars */
 
   import header from '@/components/main/v-main-header.vue';
-  import list from '@/components/main/v-main-list.vue';
+  import Tanchu from '@/components/tanchu/tanchu.vue'
   import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'index',
@@ -23,7 +21,7 @@ export default {
   },
   components: {
       'v-main-header': header,
-      'v-main-list': list
+      'Tanchu': Tanchu
   },
   created () {
     this.$store.dispatch('getLatestArticles');
@@ -39,5 +37,8 @@ export default {
 }
 </script>
 
-<style  lang="stylus" rel="stylesheet/stylus" scoped>
+<style  lang="stylus" rel="stylesheet/stylus">
+  @import "../../assets/css/mix.styl"
+  .sideBar
+    transition:all 1s
 </style>

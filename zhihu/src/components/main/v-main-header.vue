@@ -1,14 +1,14 @@
 <template>
     <div class="header">
-      <div class="nav-bar">
+      <div class="nav-bar" @click="showSideBar">
         <div class="nav-bar-center"></div>
       </div>
       <h2 class="title">
         {{title}}
       </h2>
-      <i class="icon-bell">
+      <i class="icon-bell" v-if="isIndex">
       </i>
-      <ul class="circle-wrap">
+      <ul class="circle-wrap" v-if="isIndex">
         <li class="circle-icon"></li>
         <li class="circle-icon"></li>
         <li class="circle-icon"></li>
@@ -17,7 +17,7 @@
 </template>
 
 <script>
-
+  import { mapActions, mapGetters } from 'vuex'
     export default {
         name: 'v-main-header',
         data () {
@@ -25,7 +25,18 @@
                 'title': '首页'
             }
         },
-        props: {}
+        props: {
+        },
+        methods: {
+          showSideBar () {
+            this.$store.dispatch('changeSideBar');
+          }
+        },
+      computed: {
+        ...mapGetters({
+          isIndex: 'isIndex'
+        })
+      }
     }
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only  添加scoped属性限制css只能在本模板用 -->

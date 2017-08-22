@@ -6,12 +6,13 @@
             <i  ref="loadIcon" :class="{'icon-spinner11' :!loadStart&&loadingCondition, 'icon-spinner8':loadStart||loadOk,'load-icon' :true}"></i>
           </div>
         </transition>
-        <div class="v-main-swiper-wraper">
+        <!--  <div class="v-main-swiper-wraper">
             <v-main-swiper :imageInfos = "allArticles[0].top_stories"></v-main-swiper>
           </div>
           <div class="main-list">
             <v-load-list v-for="(article,index) in allArticles" :list-date = "article.date" :list-contents = "article.stories" :key = "index" ref="list"></v-load-list>
-          </div>
+          </div>-->
+        <IndexList :mainlist="mainlist"></IndexList>
       </div>
     </div>
 </template>
@@ -22,6 +23,7 @@
   import mainSwiper from '@/components/main/v-main-swiper.vue';
   import loadList from '@/components/main/loadList.vue'
   import BScroll from 'better-scroll'
+  import IndexList from '@/components/main/v-index-list.vue';
   import { mapGetters } from 'vuex'
 
   export default {
@@ -35,7 +37,8 @@
               standardTop: 20,   //  距离视口的标准高度
               touchLength: 0,     // 大于零  手指下滑
               loadingCondition: false, // 判断是否满足加载条件
-              loadOk: false          //  判断是否加载完成
+              loadOk: false,          //  判断是否加载完成
+              mainlist: {}
             }
         },
         props: {
@@ -44,8 +47,9 @@
           }
         },
         components: {
-          'v-main-swiper': mainSwiper,
-          'v-load-list': loadList
+//          'v-main-swiper': mainSwiper,
+//          'v-load-list': loadList,
+            'IndexList': IndexList
         },
         created () {
           this.$nextTick(() => {
@@ -66,7 +70,6 @@
                 })
               }
               this.scrollLength = pos.y
-              console.log(this.everyListTop)
             })
           })
         },
@@ -138,7 +141,7 @@
             if (this.loadNewFlag && this.$refs.loadTip) {
               this.current = e.touches[0].clientY;
               this.touchLength = this.current - this.touchStart;
-              this.topLength = (this.touchLength / 6 - this.$refs.loadTip.offsetHeight)   //  距离视口的高度
+              this.topLength = (this.touchLength / 3 - this.$refs.loadTip.offsetHeight)   //  距离视口的高度
               if (this.touchLength > 0 && !this.loadStart) {
                 this.$refs.loadTip.style.transform = `translateY(${this.topLength}px) rotate(${this.touchLength / 5}deg`
               }
@@ -181,6 +184,4 @@
       .icon-spinner8
         transform: rotate(0deg)
         animation:loading .8s ease infinite
-    .main-list
-      padding:rem(10) rem(15)
 </style>

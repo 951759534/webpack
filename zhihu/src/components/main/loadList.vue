@@ -73,6 +73,7 @@
 <style lang="stylus" rel="stylesheet/stylus" scoped>
   @import "../../assets/css/mix.styl"
     .load-list
+      padding:rem(20) rem(20) 0 rem(20)
       .load-wrapper
         .list-time-detail
           padding-left:rem(5)
