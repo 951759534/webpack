@@ -16,5 +16,8 @@ export const getters = {
   },
   sideList: (state) => {
     return state.sideList
+  },
+  isIndex: (state) => {
+    return state.isIndex
   }
 };

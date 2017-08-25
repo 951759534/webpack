@@ -24,23 +24,11 @@
   -moz-osx-font-smoothing: grayscale
 
 
-.icon-thumbs_up_alt:before
-  content: "\f087"
-
-.icon-bell:before
-  content: "\f0a2"
-
-.icon-_596:before
-  content: "\f27b"
-
 .icon-home:before
   content: "\e900"
 
 .icon-download3:before
   content: "\e9c7"
-
-.icon-star-empty:before
-  content: "\e9d7"
 
 .icon-plus:before
   content: "\ea0a"
@@ -51,3 +39,28 @@
 .icon-share2:before
   content: "\ea82"
 
+.icon-thumbs_up_alt:before
+  content: "\f087"
+
+.icon-bell:before
+  content: "\f0a2"
+
+.icon-spinner8:before
+  content: "\e981"
+
+.icon-spinner11:before
+  content: "\e984"
+
+.icon-star-full:before
+  content: "\e9d9"
+
+@keyframes loading
+  from
+    transform: rotate(0deg) scale(1)
+  to
+    transform: rotate(360deg) scale(1)
+@keyframes loaded
+  from
+    transform: scale(1) rotate(0deg)
+  to
+    transform: scale(0) rotate(180deg)

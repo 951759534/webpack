@@ -9,17 +9,16 @@ export const actions = {
     /* shop.getProducts(products => {
      /!* commit(types.RECEIVE_PRODUCTS, { products })  *!/
      }) */
-    axios.get('api/news/latest').then(function (res) {
-      commit(types.RECEIVE_LATESTARTICLES, { 'latestArticles': res.data });
-      localStorage.setItem('latestArticles', JSON.stringify(res.data));
-    }).catch(function (erro) {
-      commit(types.RECEIVE_LATESTARTICLES, {
-        'latestArticles': {
-          'erro': erro
-        }
-      })
-      console.log(erro);
-    });
+      axios.get('api/news/latest').then(function (res) {
+        commit(types.RECEIVE_LATESTARTICLES, { 'latestArticles': res.data });
+        localStorage.setItem('latestArticles', JSON.stringify(res.data));
+      }).catch(function (erro) {
+        commit(types.RECEIVE_LATESTARTICLES, {
+          'latestArticles': {
+            'erro': erro
+          }
+        })
+      });
   },
   getNextArticles ({ commit }, { date }) {
     axios.get('api/news/before/' + date).then((res) => {
@@ -45,5 +44,15 @@ export const actions = {
     }).catch((erro) => {
       console.log(erro)
     })
+  },
+  getThemeList ({ commit }, { themeId }) {
+    axios.get('api/theme/' + themeId).then((res) => {
+      commit(types.GET_THEME, {
+        'themeList': res.data
+      })
+    })
+  },
+  getNextThemeList ({ commit }, {themeId, date}) {
+
   }
  }

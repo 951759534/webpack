@@ -12,6 +12,7 @@ export const mutations = {
       state.allArticles[0] = JSON.parse(localStorage.getItem('latestArticles'))
     }
     state.loadStart = false
+    state.isIndex = true
   },
   [types.RECEIVE_NEXTTARTICLES] (state, {nextArticles}) {
     state.allArticles.push(nextArticles)
@@ -28,6 +29,11 @@ export const mutations = {
   },
   [types.SIDELIST] (state, {sideList}) {
     state.sideList = sideList;
+  },
+  [types.GET_THEME] (state, { themeList }) {
+    state.allArticles[0] = themeList;
+    console.log(themeList);
+    state.sideBar = false;
   }
 };
 export const state = {
@@ -35,5 +41,6 @@ export const state = {
   loadNext: false,
   loadStart: false,      //  加载前和加载中状态
   sideBar: false,
-  sideList: Array
+  sideList: Array,
+  isIndex: false
 };

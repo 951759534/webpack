@@ -65,6 +65,8 @@
             newDate.setDate(date.slice(6, 8));
             return newDate;
           }
+        },
+        created () {
         }
     }
 </script>

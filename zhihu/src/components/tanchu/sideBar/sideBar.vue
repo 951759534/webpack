@@ -1,3 +1,4 @@
+<script src="../../../store/mutation-types.js"></script>
 <template>
     <div class="sideBar"  ref="sideBar">
         <div class="sideWrapper">
@@ -11,12 +12,12 @@
               <OtherTip class="otherTip" :icon="OtherTipIcon2" :message="OtherTipMessage2"></OtherTip>
             </div>
           </div>
-          <div class="index">
+          <div class="index" @click="goIndex">
             <i class="icon-home selected homeStyle"></i>
             <span class="selected">首页</span>
           </div>
-          <ul class="side-list">
-            <li v-for="list in sideList" class="list-style">{{list.name}} <i class="icon-plus plusStyle"></i></li>
+          <ul class="side-list" @click="changeTheme">
+            <li v-for="(list,index) in sideList" class="list-style" :data-id="index">{{list.name}} <i class="icon-plus plusStyle"></i></li>
           </ul>
         </div>
     </div>
@@ -43,13 +44,12 @@
     },
     created () {
       this.$nextTick(() => {
-        console.log(this.$refs.sideBar)
         this.sideBar = new BScroll(this.$refs.sideBar, {
           bounce: false,
           scrollY: true,
           probeType: 3,
           deceleration: 0.002,
-          click: false
+          click: true
         });
       })
     },
@@ -62,6 +62,21 @@
       this.$nextTick(() => {
         this.sideBar.refresh()
       })
+    },
+    methods: {
+      changeTheme (e) {
+        if (this.sideList instanceof Array) {
+          if (e.target.dataset.hasOwnProperty("id")) {
+            var _this = this;
+            this.$router.push({path: '/zhihu/theme/' + _this.sideList[e.target.dataset.id].id})
+          } else {
+          }
+        }
+      },
+      goIndex () {
+        this.$router.push({path: '/zhihu/index'})
+        this.$store.dispatch("changeSideBar")
+      }
     }
   }
 </script>
@@ -111,16 +126,17 @@
       color:#00a2ea
   .side-list
     width:100%
-    margin-top:rem(25)
+    margin:rem(25) 0
+    padding-bottom:rem(15)
     .list-style
       box-sizing:border-box
       height: rem(30)
       width:100%
-      padding:0 rem(30) rem(20) rem(20)
-      margin-bottom:rem(22)
+      padding:0 rem(30) rem(50) rem(20)
       font-size:rem(18)
       .plusStyle
         font-size:rem(14)
         float:right
         color:#868686
+        width:rem(20)
 </style>
